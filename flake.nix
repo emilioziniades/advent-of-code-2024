@@ -1,5 +1,5 @@
 {
-  description = "A flake to set up basic development shells";
+  description = "Guile development environment for Advent of Code 2024";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -18,7 +18,8 @@
       default = pkgs.mkShell {
         buildInputs = with pkgs; [
           # put your packages here!
-          curl
+          guile
+          guile-gnutls
         ];
       };
     });
