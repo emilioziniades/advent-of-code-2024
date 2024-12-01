@@ -1,4 +1,7 @@
+(define-module (fetch) #: export (fetch-input))
+
 (use-modules
+  (io)
   (web client)
   (web response)
   (ice-9 format)
@@ -6,9 +9,6 @@
 
 (define (success? response)
   (eq? 200 (response-code response)))
-
-(define (write-file filename text)
-  (with-output-to-file filename (lambda () (display text))))
 
 (define (fetch-input day)
   (let
