@@ -7,5 +7,5 @@ test filter="":
 
 repl:
     rm -f $GUILE_REPL_SOCKET
-    guile --listen="$(pwd)/$GUILE_REPL_SOCKET"
+    guile -L src --listen="$(pwd)/$GUILE_REPL_SOCKET" 
     rm $GUILE_REPL_SOCKET
