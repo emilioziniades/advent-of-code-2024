@@ -14,3 +14,5 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - run: nix develop --command just test
+        env:
+          AOC_COOKIE: "${{ secrets.AOC_COOKIE }}"
