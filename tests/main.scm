@@ -1,6 +1,6 @@
 (add-to-load-path "src")
 
-(use-modules (srfi srfi-1) (srfi srfi-64) (fetch) (io) (day01))
+(use-modules (srfi srfi-1) (srfi srfi-64) (fetch) (io) (day01) (day02))
 
 ;; TODO: figure out test filtering/skipping
 
@@ -16,7 +16,7 @@
          (when do-fetch (fetch-input day))
          (define data (read-file filename))
          (define actual (test-fn data))
-         (test-equal actual expected))
+         (test-equal expected actual))
 
 (test-begin "advent-of-code")
 
@@ -24,6 +24,9 @@
 (run-test 1 "input/day01.txt" total-distance 2192892 #:do-fetch #t)
 (run-test 1 "example/day01.txt" similarity-score 31)
 (run-test 1 "input/day01.txt" similarity-score 22962826 #:do-fetch #t)
+
+(run-test 2 "example/day02.txt" count-safe-reports 2)
+(run-test 2 "input/day02.txt" count-safe-reports 356 #:do-fetch #t)
 
 (define n-failures (test-runner-fail-count (test-runner-current)))
 
