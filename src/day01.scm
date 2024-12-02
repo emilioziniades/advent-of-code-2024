@@ -30,9 +30,9 @@
   (let-values 
     (((left-list right-list) (parse-input file))) 
     (list-sum (map distance 
-         (zip 
-           (sort-list left-list <)
-           (sort-list right-list <))))))
+                   (zip 
+                     (sort-list left-list <)
+                     (sort-list right-list <))))))
 
 
 ;; part 2

@@ -1,4 +1,4 @@
-(define-module (fetch) #: export (fetch-input))
+(define-module (fetch) #:export (fetch-input))
 
 (use-modules
   (io)
