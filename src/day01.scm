@@ -1,16 +1,8 @@
 (define-module (day01) #: export (total-distance similarity-score))
 
-(use-modules (io) (ice-9 textual-ports) (srfi srfi-1) (srfi srfi-11) (srfi srfi-13))
+(use-modules (input) (ice-9 textual-ports) (srfi srfi-1) (srfi srfi-11) (srfi srfi-13))
 
 ;; input parsing
-
-(define (split-spaces str) (string-split str #\space))
-
-(define (drop-null-strings lst) (filter (compose not string-null?) lst))
-
-(define (strings->numbers lst) (map string->number lst))
-
-(define (lines str) (string-split str #\newline))
 
 (define (parse-input file) 
   (unzip2 
