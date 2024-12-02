@@ -9,5 +9,5 @@
 
 (define (strings->numbers lst) (map string->number lst))
 
-(define (lines str) (string-split str #\newline))
+(define (lines str) (string-split (string-trim-both str #\newline) #\newline))
 

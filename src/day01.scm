@@ -7,10 +7,9 @@
 (define (parse-input file) 
   (unzip2 
     (map strings->numbers 
-         (filter (compose not null?) 
-                 (map drop-null-strings 
-                      (map split-spaces 
-                           (lines file)))))))
+         (map drop-null-strings 
+              (map split-spaces 
+                   (lines file))))))
 
 ;; part 1
 
