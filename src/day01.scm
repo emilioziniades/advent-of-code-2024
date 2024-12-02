@@ -1,17 +1,16 @@
-(define-module (day01) #: export (total-distance))
+(define-module (day01) #: export (total-distance similarity-score))
 
-(use-modules (io) (ice-9 textual-ports) (srfi srfi-1) (srfi srfi-11))
+(use-modules (io) (ice-9 textual-ports) (srfi srfi-1) (srfi srfi-11) (srfi srfi-13))
 
 ;; input parsing
 
-(define (split-spaces s) (string-split s #\space))
+(define (split-spaces str) (string-split str #\space))
 
-(define (drop-null-strings l) (filter (compose not string-null?) l))
+(define (drop-null-strings lst) (filter (compose not string-null?) lst))
 
-(define (strings->numbers l) (map string->number l))
+(define (strings->numbers lst) (map string->number lst))
 
-(define (lines s) (string-split s #\newline))
-
+(define (lines str) (string-split str #\newline))
 
 (define (parse-input file) 
   (unzip2 
@@ -34,3 +33,26 @@
          (zip 
            (sort-list left-list <)
            (sort-list right-list <))))))
+
+
+;; part 2
+
+(define (counter lst) 
+  (define h (make-hash-table)) 
+  (map (lambda (key) 
+         (let 
+           ((value (hashq-ref h key))) 
+           (if value 
+             (hashq-set! h key (+ 1 value)) 
+             (hashq-set! h key 1))))
+       lst)
+  h)
+
+(define (similarity-score file) 
+  (let*-values 
+    (((left-list right-list) (parse-input file))
+     ((count) (counter right-list)))
+    (list-sum
+      (map (lambda (n)
+             (* n (hashq-ref count n 0)))
+           left-list))))
