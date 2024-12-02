@@ -1,4 +1,4 @@
-(define-module (day02) #: export (count-safe-reports))
+(define-module (day02) #: export (count-safe-reports count-safe-reports-with-dampener))
 
 (use-modules (io) (input) (srfi srfi-1) (srfi srfi-11))
 
@@ -40,3 +40,21 @@
 
 (define (positive? n) (> n 0))
 (define (negative? n) (< n 0))
+
+;; part 2
+
+(define (count-safe-reports-with-dampener file) 
+  (length 
+    (filter safe-with-dampener? 
+            (parse-input file))))
+
+(define (safe-with-dampener? lst)
+  (let 
+    ((lsts (cons lst 
+                 (map
+                   (lambda (n) (list-remove lst n)) 
+                   (iota (length lst)))))) 
+    (any safe? lsts)))
+
+
+(define (list-remove lst n) (append (take lst n) (drop lst (+ 1 n))))

@@ -27,6 +27,8 @@
 
 (run-test 2 "example/day02.txt" count-safe-reports 2)
 (run-test 2 "input/day02.txt" count-safe-reports 356 #:do-fetch #t)
+(run-test 2 "example/day02.txt" count-safe-reports-with-dampener 4)
+(run-test 2 "input/day02.txt" count-safe-reports-with-dampener 413 #:do-fetch #t)
 
 (define n-failures (test-runner-fail-count (test-runner-current)))
 
