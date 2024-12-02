@@ -18,6 +18,8 @@
          (define actual (test-fn data))
          (test-equal expected actual))
 
+(unless (file-exists? "input") (mkdir "input"))
+
 (test-begin "advent-of-code")
 
 (run-test 1 "example/day01.txt" total-distance 11)
