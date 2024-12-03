@@ -2,8 +2,6 @@
 
 (use-modules (io) (input) (srfi srfi-1) (srfi srfi-11))
 
-(define file (read-file "example/day02.txt"))
-
 ;; input parsing
 
 (define (parse-input file) 

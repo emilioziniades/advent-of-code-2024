@@ -1,6 +1,13 @@
 (add-to-load-path "src")
 
-(use-modules (srfi srfi-1) (srfi srfi-64) (fetch) (io) (day01) (day02))
+(use-modules
+  (srfi srfi-1)
+  (srfi srfi-64)
+  (fetch)
+  (io)
+  (day01)
+  (day02)
+  (day03))
 
 ;; TODO: figure out test filtering/skipping
 
@@ -31,6 +38,9 @@
 (run-test 2 "input/day02.txt" count-safe-reports 356 #:do-fetch #t)
 (run-test 2 "example/day02.txt" count-safe-reports-with-dampener 4)
 (run-test 2 "input/day02.txt" count-safe-reports-with-dampener 413 #:do-fetch #t)
+
+(run-test 3 "example/day03.txt" execute-multiplications 161)
+(run-test 3 "input/day03.txt" execute-multiplications 184511516 #:do-fetch #t)
 
 (define n-failures (test-runner-fail-count (test-runner-current)))
 
