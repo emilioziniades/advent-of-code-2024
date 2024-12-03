@@ -4,6 +4,7 @@
 (use-modules
   (ice-9 getopt-long)
   (ice-9 format)
+  (ice-9 regex)
   (srfi srfi-64)
   (util colour))
 
@@ -22,7 +23,7 @@
   (define filter (option-ref options 'filter #f))
   (when filter
     (test-skip (lambda (runner)
-                 (not (string-prefix? filter (test-runner-test-name runner)))))))
+                 (not (string-match filter (test-runner-test-name runner)))))))
 
 (define (right-pad s) (format #f "~30a" s))
 
