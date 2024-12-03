@@ -20,8 +20,13 @@
           guile
           guile-gnutls
           just
+          self.packages.${system}.code-formatter
         ];
       };
+    });
+
+    packages = forAllSystems (system: pkgs: {
+      code-formatter = pkgs.callPackage ./nix/code-formatter.nix {};
     });
   };
 }
