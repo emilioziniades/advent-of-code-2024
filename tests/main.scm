@@ -30,7 +30,7 @@
          (define actual (test-fn data))
          (test-equal name expected actual))
 
-(define (print-test-result runner)
+(define (on-test-end runner)
   (let ((test-name (test-result-ref runner 'test-name #f))
         (actual-value (object->string (test-result-ref runner 'actual-value #f)))
         (expected-value (object->string (test-result-ref runner 'expected-value #f)))
@@ -39,18 +39,25 @@
       (cond ((equal? result-kind "skip")
              (display-colour grey (string-append test-name ": " result-kind)))
             ((equal? result-kind "pass") (display-colour green (string-append test-name ": " result-kind)))
-            (#t (display-colour red (string-append test-name ": " result-kind ". expected: " expected-value ", actual: " actual-value))))
+            ((equal? result-kind "fail") (display-colour red (string-append test-name ": " result-kind ". expected: " expected-value ", actual: " actual-value)))
+            (#t (raise-exception (string-append "unexpected result kind: " result-kind))))
       (newline))))
 
-(define (print-group-begin runner suite-name count)
+(define (on-group-begin runner suite-name _count)
   (begin
     (newline)
-    (display "START GROUP ")
+    (display "START ")
     (display suite-name)
     (newline)
     (newline)))
 
-(define (test-on-final runner) 
+(define (on-group-end runner)
+  (begin
+    (newline)
+    (display "END")
+    (newline)))
+
+(define (on-final runner) 
   (begin
     (newline)
     (display "pass: ")
@@ -69,9 +76,10 @@
 (define runner (test-runner-null))
 (test-runner-current runner)
 
-(test-runner-on-group-begin! runner print-group-begin)
-(test-runner-on-test-end! runner print-test-result)
-(test-runner-on-final! runner test-on-final)
+(test-runner-on-group-begin! runner on-group-begin)
+(test-runner-on-group-end! runner on-group-end)
+(test-runner-on-test-end! runner on-test-end)
+(test-runner-on-final! runner on-final)
 
 (when filter
   (test-skip (lambda (runner)
@@ -81,7 +89,7 @@
 
 (test-begin "advent-of-code")
 
-(run-test "day01-part1-example" "example/day01.txt" total-distance 1100)
+(run-test "day01-part1-example" "example/day01.txt" total-distance 11)
 (run-test "day01-part1-input" "input/day01.txt" total-distance 2192892 #:fetch-day 1)
 (run-test "day01-part2-example" "example/day01.txt" similarity-score 31)
 (run-test "day01-part2-input" "input/day01.txt" similarity-score 22962826 #:fetch-day 1)
@@ -96,4 +104,5 @@
 (run-test "day03-part2-example" "example/day03-part2.txt" execute-muls-with-donts 48)
 (run-test "day03-part2-input" "input/day03.txt" execute-muls-with-donts 90044227 #:fetch-day 3)
 
+(test-end "advent-of-code-inner")
 (test-end "advent-of-code")
