@@ -39,8 +39,10 @@
 (run-test 2 "example/day02.txt" count-safe-reports-with-dampener 4)
 (run-test 2 "input/day02.txt" count-safe-reports-with-dampener 413 #:do-fetch #t)
 
-(run-test 3 "example/day03.txt" execute-multiplications 161)
-(run-test 3 "input/day03.txt" execute-multiplications 184511516 #:do-fetch #t)
+(run-test 3 "example/day03.txt" execute-muls 161)
+(run-test 3 "input/day03.txt" execute-muls 184511516 #:do-fetch #t)
+(run-test 3 "example/day03-part2.txt" execute-muls-with-donts 48)
+(run-test 3 "input/day03.txt" execute-muls-with-donts 90044227 #:do-fetch #t)
 
 (define n-failures (test-runner-fail-count (test-runner-current)))
 
