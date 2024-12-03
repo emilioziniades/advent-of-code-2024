@@ -3,14 +3,15 @@
 
 (use-modules
   (ice-9 getopt-long)
+  (ice-9 format)
   (srfi srfi-64)
   (util colour))
 
 (define (init-test-runner) 
   (define runner (test-runner-null))
+  (test-runner-on-test-end! runner on-test-end)
   (test-runner-on-group-begin! runner on-group-begin)
   (test-runner-on-group-end! runner on-group-end)
-  (test-runner-on-test-end! runner on-test-end)
   (test-runner-on-final! runner on-final)
   (test-runner-current runner)
   (set-test-filter-from-command-line))
@@ -23,6 +24,7 @@
     (test-skip (lambda (runner)
                  (not (string-prefix? filter (test-runner-test-name runner)))))))
 
+(define (right-pad s) (format #f "~30a" s))
 
 (define (on-test-end runner)
   (let ((test-name (test-result-ref runner 'test-name #f))
@@ -31,10 +33,24 @@
         (result-kind (symbol->string (test-result-ref runner 'result-kind #f))))
     (begin
       (cond ((equal? result-kind "skip")
-             (display-colour grey (string-append test-name ": " result-kind)))
-            ((equal? result-kind "pass") (display-colour green (string-append test-name ": " result-kind)))
-            ((equal? result-kind "fail") (display-colour red (string-append test-name ": " result-kind ". expected: " expected-value ", actual: " actual-value)))
-            (#t (raise-exception (string-append "unexpected result kind: " result-kind))))
+             (begin
+               (display-colour grey (right-pad (string-append test-name ":")))
+               (display-colour grey result-kind)))
+            ((equal? result-kind "pass")
+             (begin
+               (display-colour green (right-pad (string-append test-name ":")))
+               (display-colour green result-kind)))
+            ((equal? result-kind "fail")
+             (begin
+               (display-colour red (right-pad (string-append test-name ": ")))
+               (display-colour red result-kind)
+               (display "\t")
+               (display-colour red "expected: ")
+               (display-colour red expected-value)
+               (display-colour red ", actual: ")
+               (display-colour red actual-value)))
+            (#t
+             (raise-exception (string-append "unexpected result kind: " result-kind))))
       (newline))))
 
 (define (on-group-begin runner suite-name _count)

@@ -10,5 +10,5 @@
 (define red (ansi-escape-sequence 31))
 (define green (ansi-escape-sequence 32))
 
-(define (display-colour color text)
-  (display (string-append color text reset)))
+(define (display-colour colour str)
+  (display (string-append colour str reset)))

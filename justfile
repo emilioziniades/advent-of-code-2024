@@ -5,7 +5,7 @@ test $filter="":
 
 repl $repl_socket="guile-repl.socket":
     rm -f $repl_socket
-    guile -L src --listen="$(pwd)/$repl_socket" 
+    guile -L src -L tests --listen="$(pwd)/$repl_socket" 
     rm $repl_socket
 
 # TODO: figure out formatting files and checking if files are formatted
