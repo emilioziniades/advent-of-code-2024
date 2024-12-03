@@ -12,17 +12,3 @@
 
 (define (display-colour color text)
   (display (string-append color text reset)))
-
-;; (display-colour red "This is red text.")
-;; (newline)
-;; (display "and it is reset")
-;; (newline)
-;; (display-colour green "This is green text.")
-;; (newline)
-;; (display "and it is reset")
-;; (newline)
-;; (display-colour grey "This is grey text.")
-;; (newline)
-;; (display "and it is reset")
-
-;; (map (lambda (n) (display-colour (ansi-escape-sequence n) "This is some text") (newline)) (iota 49))
