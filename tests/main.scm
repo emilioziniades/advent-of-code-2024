@@ -18,6 +18,7 @@
 (unless (file-exists? "input")
  (mkdir "input"))
 (test-begin "advent-of-code")
+;; day 1
 (run-test "day01-part1-example" "example/day01.txt" total-distance 11)
 (run-test "day01-part1-input"
           "input/day01.txt"
@@ -32,6 +33,7 @@
           22962826
           #:fetch-day
           1)
+;; day 2
 (run-test "day02-part1-example" "example/day02.txt" count-safe-reports 2)
 (run-test "day02-part1-input"
           "input/day02.txt"
@@ -49,6 +51,7 @@
           413
           #:fetch-day
           2)
+;; day 3
 (run-test "day03-part1-example" "example/day03.txt" execute-muls 161)
 (run-test "day03-part1-input"
           "input/day03.txt"
