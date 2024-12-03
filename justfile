@@ -2,13 +2,8 @@ set dotenv-load := true
 
 export GUILE_REPL_SOCKET := "guile-repl.socket"
 
-test filter="":
-    #!/usr/bin/env bash
-    guile tests/main.scm --filter "{{ filter }}"
-    status=$?
-    cat advent-of-code.log
-    rm advent-of-code.log
-    exit $status
+test $filter="":
+    guile tests/main.scm --filter "$filter"
 
 repl:
     rm -f $GUILE_REPL_SOCKET
