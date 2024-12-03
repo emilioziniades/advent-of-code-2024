@@ -14,9 +14,12 @@
          (define data (read-file filename))
          (define actual (test-fn data))
          (test-equal test-name expected actual))
+
+;; SETUP
 (init-test-runner)
 (unless (file-exists? "input")
  (mkdir "input"))
+;; TESTS
 (test-begin "advent-of-code")
 ;; day 1
 (run-test "day01-part1-example" "example/day01.txt" total-distance 11)

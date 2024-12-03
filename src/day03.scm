@@ -17,6 +17,7 @@
                               output?
                               (n output-n set-output-n)
                               (do-mul output-do-mul set-output-do-mul))
+
 (define (execute-muls-with-donts file)
  (let ((pattern "do\\(\\)|don't\\(\\)|mul\\(([0-9]{1,3}),([0-9]{1,3})\\)"))
   (output-n (fold-matches pattern file (output 0 #t) update-output))))

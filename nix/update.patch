@@ -1,8 +1,8 @@
 diff --git a/format.scm b/format.scm
-index 3da1a36..f11d39c 100644
+index 3da1a36..c30d6a1 100644
 --- a/format.scm
 +++ b/format.scm
-@@ -175,6 +175,28 @@
+@@ -175,6 +175,50 @@
                      (list (car zs)))
                     (cdr zs)))))
  
@@ -24,6 +24,28 @@ index 3da1a36..f11d39c 100644
 +           (values (if (and (car? 'define-module (car zs))
 +                            (pair? (cdr zs))
 +                            (not (car? 'define-module (cadr zs))))
++                    (list (car zs) blank-symbol)
++                    (list (car zs)))
++                   (cdr zs)))))
++
++   ; Blank line after define-immutable-record-type
++   (set! x
++         (map-rec y x
++          (transform zs y
++           (values (if (and (car? 'define-immutable-record-type (car zs))
++                            (pair? (cdr zs))
++                            (not (car? 'define-immutable-record-type (cadr zs))))
++                    (list (car zs) blank-symbol)
++                    (list (car zs)))
++                   (cdr zs)))))
++
++   ; Blank line after define*
++   (set! x
++         (map-rec y x
++          (transform zs y
++           (values (if (and (car? 'define* (car zs))
++                            (pair? (cdr zs))
++                            (not (car? 'define* (cadr zs))))
 +                    (list (car zs) blank-symbol)
 +                    (list (car zs)))
 +                   (cdr zs)))))

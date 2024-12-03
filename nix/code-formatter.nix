@@ -42,6 +42,7 @@ stdenv.mkDerivation {
   ];
 
   patches = [
+    # TODO: upstream these changes
     ./update.patch
   ];
 
