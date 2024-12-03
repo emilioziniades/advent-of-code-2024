@@ -1,14 +1,12 @@
 set dotenv-load := true
 
-export GUILE_REPL_SOCKET := "guile-repl.socket"
-
 test $filter="":
     guile tests/main.scm --filter "$filter"
 
-repl:
-    rm -f $GUILE_REPL_SOCKET
-    guile -L src --listen="$(pwd)/$GUILE_REPL_SOCKET" 
-    rm $GUILE_REPL_SOCKET
+repl $repl_socket="guile-repl.socket":
+    rm -f $repl_socket
+    guile -L src --listen="$(pwd)/$repl_socket" 
+    rm $repl_socket
 
 # TODO: figure out formatting files and checking if files are formatted
 # See here: https://gist.github.com/shegeley/cb44e156c10b8f235d8abd0dd768cff4
