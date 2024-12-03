@@ -1,0 +1,33 @@
+diff --git a/format.scm b/format.scm
+index 3da1a36..f11d39c 100644
+--- a/format.scm
++++ b/format.scm
+@@ -175,6 +175,28 @@
+                     (list (car zs)))
+                    (cdr zs)))))
+ 
++   ; Blank line after use-modules
++   (set! x
++         (map-rec y x
++          (transform zs y
++           (values (if (and (car? 'use-modules (car zs))
++                            (pair? (cdr zs))
++                            (not (car? 'use-modules (cadr zs))))
++                    (list (car zs) blank-symbol)
++                    (list (car zs)))
++                   (cdr zs)))))
++
++   ; Blank line after define-module
++   (set! x
++         (map-rec y x
++          (transform zs y
++           (values (if (and (car? 'define-module (car zs))
++                            (pair? (cdr zs))
++                            (not (car? 'define-module (cadr zs))))
++                    (list (car zs) blank-symbol)
++                    (list (car zs)))
++                   (cdr zs)))))
++
+    ; Blank line before include
+    (set! x
+          (map-rec y x

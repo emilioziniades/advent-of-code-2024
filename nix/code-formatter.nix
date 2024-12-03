@@ -41,5 +41,9 @@ stdenv.mkDerivation {
     matchable
   ];
 
+  patches = [
+    ./update.patch
+  ];
+
   doCheck = true;
 }
