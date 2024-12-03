@@ -1,5 +1,6 @@
 ;; print colour to the terminal using ANSI escape sequences
 (define-module (util colour) #:export (display-colour grey red green))
+
 (define (ansi-escape-sequence n)
  (let ((escape (string #\escape)))
   (string-append escape "[" (number->string n) "m")))

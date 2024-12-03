@@ -7,6 +7,7 @@
              (day01)
              (day02)
              (day03))
+
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
           (fetch-input fetch-day))

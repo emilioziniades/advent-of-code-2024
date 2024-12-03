@@ -1,5 +1,6 @@
 ;; a very simple test runner
 (define-module (test-runner) #:export (init-test-runner))
+
 (use-modules (ice-9 getopt-long)
              (ice-9 format)
              (ice-9 regex)

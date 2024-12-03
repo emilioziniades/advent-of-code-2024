@@ -1,9 +1,11 @@
 (define-module (day01) #:export (total-distance similarity-score))
+
 (use-modules (util input)
              (ice-9 textual-ports)
              (srfi srfi-1)
              (srfi srfi-11)
              (srfi srfi-13))
+
 ;; input parsing
 (define (parse-input file)
  (unzip2

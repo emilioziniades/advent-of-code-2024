@@ -1,10 +1,12 @@
 ;; function to fetch puzzle input for a specified day
 (define-module (util fetch) #:export (fetch-input))
+
 (use-modules (util io)
              (web client)
              (web response)
              (ice-9 format)
              (srfi srfi-11))
+
 (define (fetch-input day)
  (let ((filename (string-append "input/day" (format #f "~2,'0d" day) ".txt")))
   (unless (file-exists? filename)
