@@ -1,4 +1,4 @@
-(define-module (io) #: export (read-file write-file))
+(define-module (util io) #: export (read-file write-file))
 
 (use-modules (ice-9 textual-ports))
 

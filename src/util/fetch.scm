@@ -1,7 +1,7 @@
-(define-module (fetch) #:export (fetch-input))
+(define-module (util fetch) #:export (fetch-input))
 
 (use-modules
-  (io)
+  (util io)
   (web client)
   (web response)
   (ice-9 format)
