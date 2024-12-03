@@ -8,7 +8,7 @@ Previously, I did [2021 in Go](https://github.com/emilioziniades/advent-of-code-
 
 I've wanted to learn more about LISP, after being exposed to MIT Scheme when working through the SICP textbook.
 But having the thought "I should do AOC in a LISP" was only the beginning.
-After some research, I was quite overwhelmed with all the different languages in the LSP family.
+After some research, I was quite overwhelmed with all the different languages in the LISP family.
 I narrowed it down to four options and used a [decision matrix](https://youtu.be/c5QF2HjHLSE?t=2348) to decide, which you can find [here](https://github.com/emilioziniades/advent-of-code-2024/blob/main/.github/assets/decision-matrix.png).
 
 In short, Guile seemed like a good trade-off between pedagogical simplicity and production-ready complexity.
