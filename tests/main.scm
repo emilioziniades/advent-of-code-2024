@@ -1,6 +1,8 @@
 (add-to-load-path "src")
 
 (use-modules
+  (ice-9 getopt-long)
+  (ice-9 pretty-print)
   (srfi srfi-1)
   (srfi srfi-64)
   (fetch)
@@ -9,40 +11,46 @@
   (day02)
   (day03))
 
-;; TODO: figure out test filtering/skipping
+;; get optional tests filter from command line
 
-;; (define (print text) (display text) (display "\n"))
-;; (define (contains? value my-list) (any (lambda (x) (equal? value x)) my-list))
-;; (define args (command-line))
-;; (define filter-string (if (and (eq? (length args) 3) (contains? "--filter" args)) (last args) #f))
-;; (define tests '(((name . day-1) ()) ((name . day-1))))
-;; (print args)
-;; (print filter-string)
+(define option-spec '((filter (value #t))))
+(define options (getopt-long (command-line) option-spec))
+(define filter (option-ref options 'filter #f))
 
-(define* (run-test day filename test-fn expected #:key do-fetch) 
-         (when do-fetch (fetch-input day))
-         (define data (read-file filename))
-         (define actual (test-fn data))
-         (test-equal expected actual))
+;; setup
 
 (unless (file-exists? "input") (mkdir "input"))
 
+;; helper functions
+
+(define* (run-test name filename test-fn expected #:key fetch-day) 
+         (when fetch-day (fetch-input fetch-day))
+         (define data (read-file filename))
+         (define actual (test-fn data))
+         (test-equal name expected actual))
+
+;; run the tests
+
 (test-begin "advent-of-code")
 
-(run-test 1 "example/day01.txt" total-distance 11)
-(run-test 1 "input/day01.txt" total-distance 2192892 #:do-fetch #t)
-(run-test 1 "example/day01.txt" similarity-score 31)
-(run-test 1 "input/day01.txt" similarity-score 22962826 #:do-fetch #t)
+(when filter
+  (test-skip (lambda (runner)
+               (not (string-prefix? filter (test-runner-test-name runner))))))
 
-(run-test 2 "example/day02.txt" count-safe-reports 2)
-(run-test 2 "input/day02.txt" count-safe-reports 356 #:do-fetch #t)
-(run-test 2 "example/day02.txt" count-safe-reports-with-dampener 4)
-(run-test 2 "input/day02.txt" count-safe-reports-with-dampener 413 #:do-fetch #t)
+(run-test "day01-part1-example" "example/day01.txt" total-distance 11)
+(run-test "day01-part1-input" "input/day01.txt" total-distance 2192892 #:fetch-day 1)
+(run-test "day01-part2-example" "example/day01.txt" similarity-score 31)
+(run-test "day01-part2-input" "input/day01.txt" similarity-score 22962826 #:fetch-day 1)
 
-(run-test 3 "example/day03.txt" execute-muls 161)
-(run-test 3 "input/day03.txt" execute-muls 184511516 #:do-fetch #t)
-(run-test 3 "example/day03-part2.txt" execute-muls-with-donts 48)
-(run-test 3 "input/day03.txt" execute-muls-with-donts 90044227 #:do-fetch #t)
+(run-test "day02-part1-example" "example/day02.txt" count-safe-reports 2)
+(run-test "day02-part1-input" "input/day02.txt" count-safe-reports 356 #:fetch-day 2)
+(run-test "day02-part2-example" "example/day02.txt" count-safe-reports-with-dampener 4)
+(run-test "day02-part2-input" "input/day02.txt" count-safe-reports-with-dampener 413 #:fetch-day 2)
+
+(run-test "day03-part1-example" "example/day03.txt" execute-muls 161)
+(run-test "day03-part1-input" "input/day03.txt" execute-muls 184511516 #:fetch-day 3)
+(run-test "day03-part2-example" "example/day03-part2.txt" execute-muls-with-donts 48)
+(run-test "day03-part2-input" "input/day03.txt" execute-muls-with-donts 90044227 #:fetch-day 3)
 
 (define n-failures (test-runner-fail-count (test-runner-current)))
 
