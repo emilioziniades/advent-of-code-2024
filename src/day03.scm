@@ -1,6 +1,6 @@
 (define-module (day03) #:export (execute-muls execute-muls-with-donts))
 
-(use-modules (util io) (ice-9 regex) (srfi srfi-9 gnu))
+(use-modules (ice-9 regex) (srfi srfi-9 gnu))
 
 ;; part 1
 (define (execute-muls file)

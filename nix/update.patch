@@ -1,7 +1,30 @@
 diff --git a/format.scm b/format.scm
-index 3da1a36..c30d6a1 100644
+index 3da1a36..d68aba4 100644
 --- a/format.scm
 +++ b/format.scm
+@@ -125,14 +125,14 @@
+            y)))
+ 
+    ; Sort functions
+-   (set! x
+-         (map-rec y x
+-          (if (list? y)
+-           (concatenate (for zs (frag defun? y)
+-                         (if (defun? (car zs))
+-                          (sort zs value<)
+-                          zs)))
+-           y)))
++   ;; (set! x
++   ;;       (map-rec y x
++   ;;        (if (list? y)
++   ;;         (concatenate (for zs (frag defun? y)
++   ;;                       (if (defun? (car zs))
++   ;;                        (sort zs value<)
++   ;;                        zs)))
++   ;;         y)))
+ 
+    ; Sort macros
+    (set! x
 @@ -175,6 +175,50 @@
                      (list (car zs)))
                     (cdr zs)))))
@@ -53,3 +76,11 @@ index 3da1a36..c30d6a1 100644
     ; Blank line before include
     (set! x
           (map-rec y x
+@@ -266,6 +310,7 @@
+                    (cdr zs)))))
+ 
+    ; Remove multiple blanks
++   ;; TODO: this removes ALL blanks, not just multiple blanks
+    (set! x
+          (map-rec y x
+           (transform zs y

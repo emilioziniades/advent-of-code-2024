@@ -6,7 +6,8 @@
              (test-runner)
              (day01)
              (day02)
-             (day03))
+             (day03)
+             (day04))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -72,4 +73,12 @@
           90044227
           #:fetch-day
           3)
+;; day 4
+(run-test "day04-part1-example" "example/day04.txt" count-all-xmas 18)
+(run-test "day04-part1-input"
+          "input/day04.txt"
+          count-all-xmas
+          2603
+          #:fetch-day
+          4)
 (test-end "advent-of-code")
