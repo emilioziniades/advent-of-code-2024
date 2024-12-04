@@ -81,4 +81,11 @@
           2603
           #:fetch-day
           4)
+(run-test "day04-part2-example" "example/day04.txt" count-all-x-mas 9)
+(run-test "day04-part2-input"
+          "input/day04.txt"
+          count-all-x-mas
+          1965
+          #:fetch-day
+          4)
 (test-end "advent-of-code")

@@ -1,4 +1,4 @@
-(define-module (day04) #:export (count-all-xmas))
+(define-module (day04) #:export (count-all-xmas count-all-x-mas))
 
 (use-modules (util io) (util input) (srfi srfi-1) (ice-9 curried-definitions))
 
@@ -53,23 +53,49 @@
                lst))
   #f))
 
+;; part 2
+(define (count-all-x-mas file)
+ (let* ((data (parse-input file))
+        (size (array-length data)))
+  (length
+   (filter-map (is-x-mas? data) (combinations-2 (iota size) (iota size))))))
+
+(define ((is-x-mas? arr) pos)
+ (let* ((x (first pos))
+        (y (second pos))
+        (diagonals (list ; up left
+                         (list (- x 1) (- y 1))
+                         ; up right
+                         (list (- x 1) (+ y 1))
+                         ; down left
+                         (list (+ x 1) (- y 1))
+                         ; down right
+                         (list (+ x 1) (+ y 1))))
+        (char (apply array-ref (cons arr pos)))
+        (char-diagonals (delay (map (lambda (p)
+                                     (apply array-ref (cons arr p)))
+                                    diagonals))))
+  (and (all-in-bounds? arr diagonals)
+       (equal? #\A char)
+       (member (list->string (force char-diagonals))
+               (list "MMSS" "SSMM" "MSMS" "SMSM")))))
+
 ;; common to part 1 and 2
 (define (all-in-bounds? arr lst)
  (every (lambda (pos)
          (apply array-in-bounds? (cons arr pos)))
         lst))
 
-;; input parsing
-(define (parse-input file)
- (list->array 2 (map string->list (lines file))))
-
-;; utility functions
 (define (combinations-2 lst1 lst2)
  (append-map (lambda (i)
               (map (lambda (j)
                     (list i j))
                    lst1))
              lst2))
+
+;; input parsing
+(define (parse-input file)
+ (list->array 2 (map string->list (lines file))))
 
 ;; workspace
 (define file (read-file "example/day04.txt"))
