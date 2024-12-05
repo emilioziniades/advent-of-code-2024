@@ -17,5 +17,7 @@ repl $repl_socket="guile-repl.socket":
 format:
     find . -type f -name "*.scm" -exec scheme-format -i {} \;
 
-just format-check:
-    echo "TODO"
+format-check:
+    git status --porcelain && echo "cannot check formatting with unstaged changes" && exit 1
+    just format
+    git status --porcelain && echo "there are unformatted files" && exit 1
