@@ -18,6 +18,6 @@ format:
     find . -type f -name "*.scm" -exec scheme-format -i {} \;
 
 format-check:
-    git status --porcelain && echo "cannot check formatting with unstaged changes" && exit 1
+    git diff --exit-code
     just format
-    git status --porcelain && echo "there are unformatted files" && exit 1
+    git diff --exit-code
