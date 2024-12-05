@@ -96,7 +96,3 @@
 ;; input parsing
 (define (parse-input file)
  (list->array 2 (map string->list (lines file))))
-
-;; workspace
-(define file (read-file "example/day04.txt"))
-(define arr (parse-input file))
