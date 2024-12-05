@@ -19,8 +19,9 @@
         buildInputs = with pkgs; [
           guile
           guile-gnutls
-          just
           self.packages.${system}.code-formatter
+          just
+          watchexec
         ];
       };
     });
