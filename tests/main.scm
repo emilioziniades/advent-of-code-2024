@@ -7,7 +7,8 @@
              (day01)
              (day02)
              (day03)
-             (day04))
+             (day04)
+             (day05))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -88,4 +89,12 @@
           1965
           #:fetch-day
           4)
+;; day 5
+(run-test "day05-part1-example" "example/day05.txt" count-correct-updates 143)
+(run-test "day05-part1-input"
+          "input/day05.txt"
+          count-correct-updates
+          5639
+          #:fetch-day
+          5)
 (test-end "advent-of-code")
