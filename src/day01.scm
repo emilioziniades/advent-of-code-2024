@@ -16,9 +16,6 @@
 (define (distance lst)
  (abs (- (first lst) (second lst))))
 
-(define (list-sum lst)
- (fold + 0 lst))
-
 (define (total-distance file)
  (let-values
   (((left-list right-list) (parse-input file)))
