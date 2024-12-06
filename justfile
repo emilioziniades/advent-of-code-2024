@@ -1,5 +1,9 @@
 set dotenv-load := true
 
+alias t := test
+alias w := watch
+alias r := repl
+
 default:
     @just --list --unsorted
 
