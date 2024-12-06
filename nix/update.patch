@@ -1,9 +1,23 @@
 diff --git a/format.scm b/format.scm
-index 3da1a36..d68aba4 100644
+index 3da1a36..55a112e 100644
 --- a/format.scm
 +++ b/format.scm
-@@ -125,14 +125,14 @@
-            y)))
+@@ -117,22 +117,22 @@
+       y)))
+ 
+    ; Sort cases
+-   (set! x
+-         (map-rec y x
+-          (if (and (car? 'case y)
+-                   (length? 2 y))
+-           (cons* (car y) (cadr y) (sort (cddr y) value<))
+-           y)))
++   ;; (set! x
++   ;;       (map-rec y x
++   ;;        (if (and (car? 'case y)
++   ;;                 (length? 2 y))
++   ;;         (cons* (car y) (cadr y) (sort (cddr y) value<))
++   ;;         y)))
  
     ; Sort functions
 -   (set! x
