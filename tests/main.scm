@@ -97,4 +97,14 @@
           5639
           #:fetch-day
           5)
+(run-test "day05-part2-example"
+          "example/day05.txt"
+          count-incorrect-updates
+          123)
+(run-test "day05-part2-input"
+          "input/day05.txt"
+          count-incorrect-updates
+          5273
+          #:fetch-day
+          5)
 (test-end "advent-of-code")

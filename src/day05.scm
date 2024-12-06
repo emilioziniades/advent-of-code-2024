@@ -1,11 +1,13 @@
-(define-module (day05) #:export (count-correct-updates))
+(define-module (day05)
+               #:export
+               (count-correct-updates count-incorrect-updates))
 
 (use-modules (util io)
              (util input)
              (srfi srfi-1)
              (ice-9 receive)
              (ice-9 curried-definitions)
-             (oop goops))
+             (ice-9 hash-table))
 
 ;; part 1
 (define (count-correct-updates file)
@@ -18,13 +20,27 @@
                                    (sorted? update (rules-less? rules)))
                                   updates))))))
 
+;; part 2
+(define (count-incorrect-updates file)
+ (let* ((data (parse-input file))
+        (rules (first data))
+        (updates (second data)))
+  (list-sum (strings->numbers
+             (map list-middle
+                  (map (lambda (update)
+                        (sort update (rules-less? rules)))
+                       (filter (lambda (update)
+                                (not (sorted? update (rules-less? rules))))
+                               updates)))))))
+
+;; common to both parts
 (define ((rules-less? rules) s1 s2)
  (cond
   ((member (list s1 s2) rules)
    #t)
   ((member (list s2 s1) rules)
    #f)
-  (#t
+  (else
    (raise-exception "cannot sort pair based on available rules"))))
 
 (define (list-middle lst)

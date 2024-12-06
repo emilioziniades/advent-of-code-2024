@@ -71,7 +71,7 @@
       (display-colour red expected-value)
       (display-colour red ", actual: ")
       (display-colour red actual-value)))
-    (#t
+    (else
      (raise-exception (string-append "unexpected result kind: " result-kind))))
    (newline))))
 
