@@ -12,7 +12,7 @@
 ;; part 1
 (define (count-correct-updates file)
  (let* ((data (parse-input file))
-        (rules (first data))
+        (rules (rules->set (first data)))
         (updates (second data)))
   (list-sum
    (strings->numbers (map list-middle
@@ -23,7 +23,7 @@
 ;; part 2
 (define (count-incorrect-updates file)
  (let* ((data (parse-input file))
-        (rules (first data))
+        (rules (rules->set (first data)))
         (updates (second data)))
   (list-sum (strings->numbers
              (map list-middle
@@ -36,13 +36,19 @@
 ;; common to both parts
 (define ((rules-less? rules) s1 s2)
  (cond
-  ((member (list s1 s2) rules)
+  ((hash-ref rules (list s1 s2) #f)
    #t)
-  ((member (list s2 s1) rules)
+  ((hash-ref rules (list s2 s1) #f)
    #f)
   (else
    (raise-exception "cannot sort pair based on available rules"))))
 
+(define (rules->set rules)
+ (alist->hash-table (map (lambda (rule)
+                          (cons rule #t))
+                         rules)))
+
+(rules->set '(("a" "A")))
 (define (list-middle lst)
  (list-ref lst (truncate (/ (length lst) 2))))
 
