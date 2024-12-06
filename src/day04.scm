@@ -1,6 +1,6 @@
 (define-module (day04) #:export (count-all-xmas count-all-x-mas))
 
-(use-modules (util io) (util input) (srfi srfi-1) (ice-9 curried-definitions))
+(use-modules (util input) (srfi srfi-1) (ice-9 curried-definitions))
 
 ;; part 1
 (define (count-all-xmas file)

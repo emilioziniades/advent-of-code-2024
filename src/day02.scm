@@ -2,7 +2,7 @@
                #:export
                (count-safe-reports count-safe-reports-with-dampener))
 
-(use-modules (util io) (util input) (srfi srfi-1) (srfi srfi-11))
+(use-modules (util input) (srfi srfi-1) (srfi srfi-11))
 
 ;; input parsing
 (define (parse-input file)

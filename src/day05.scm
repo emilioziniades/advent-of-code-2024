@@ -2,8 +2,7 @@
                #:export
                (count-correct-updates count-incorrect-updates))
 
-(use-modules (util io)
-             (util input)
+(use-modules (util input)
              (srfi srfi-1)
              (ice-9 receive)
              (ice-9 curried-definitions)
