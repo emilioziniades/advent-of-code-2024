@@ -5,7 +5,8 @@
                              drop-null-strings
                              strings->numbers
                              lines
-                             list-sum))
+                             list-sum
+                             make-grid))
 
 (use-modules (ice-9 textual-ports)
              (ice-9 curried-definitions)
@@ -30,3 +31,6 @@
 
 (define (list-sum lst)
  (fold + 0 lst))
+
+(define (make-grid str)
+ (list->array 2 (map string->list (lines str))))

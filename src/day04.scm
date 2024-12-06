@@ -4,7 +4,7 @@
 
 ;; part 1
 (define (count-all-xmas file)
- (let* ((data (parse-input file))
+ (let* ((data (make-grid file))
         (size (array-length data)))
   (apply + (map (count-xmas data) (combinations-2 (iota size) (iota size))))))
 
@@ -55,7 +55,7 @@
 
 ;; part 2
 (define (count-all-x-mas file)
- (let* ((data (parse-input file))
+ (let* ((data (make-grid file))
         (size (array-length data)))
   (length
    (filter-map (is-x-mas? data) (combinations-2 (iota size) (iota size))))))
@@ -92,7 +92,3 @@
                     (list i j))
                    lst1))
              lst2))
-
-;; input parsing
-(define (parse-input file)
- (list->array 2 (map string->list (lines file))))
