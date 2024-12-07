@@ -13,7 +13,7 @@
 ;; for each of these positions:
 ;;      run the guard steps again:
 ;;      - if out of bounds, no cycle
-;;      - if reached same position more than 5 times, cycle
+;;      - if reached same (position, direction) more than once, cycle
 ;;      - otherwise, keep going
 ;; 
 (define (count-good-obstructions file)
@@ -35,12 +35,12 @@
  (define (recursive-guard-step arr pos direction)
   (let* ((next-pos (next-position arr pos direction)))
    (begin
-    (hash-increment visited pos)
+    (hash-increment visited (list pos direction))
     (cond
      ((not (is-in-bounds? arr next-pos))
       #f)
-     ;; cheap cycle check - must be a better way but oh well, it works as is
-     ((> (hash-ref visited pos 0) 5)
+     ;; cycle check
+     ((> (hash-ref visited (list pos direction) 0) 1)
       #t)
      ((or (is-obstruction? arr next-pos)
           (equal? next-pos obstruction-pos))
