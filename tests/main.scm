@@ -115,4 +115,11 @@
           5551
           #:fetch-day
           6)
+(run-test "day06-part2-example" "example/day06.txt" count-good-obstructions 6)
+(run-test "day06-part2-input"
+          "input/day06.txt"
+          count-good-obstructions
+          1939
+          #:fetch-day
+          6)
 (test-end "advent-of-code")
