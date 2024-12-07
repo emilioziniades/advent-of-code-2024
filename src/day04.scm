@@ -85,10 +85,3 @@
  (every (lambda (pos)
          (apply array-in-bounds? (cons arr pos)))
         lst))
-
-(define (combinations-2 lst1 lst2)
- (append-map (lambda (i)
-              (map (lambda (j)
-                    (list i j))
-                   lst1))
-             lst2))

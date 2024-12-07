@@ -6,7 +6,8 @@
                              strings->numbers
                              lines
                              list-sum
-                             make-grid))
+                             make-grid
+                             combinations-2))
 
 (use-modules (ice-9 textual-ports)
              (ice-9 curried-definitions)
@@ -34,3 +35,10 @@
 
 (define (make-grid str)
  (list->array 2 (map string->list (lines str))))
+
+(define (combinations-2 lst1 lst2)
+ (append-map (lambda (i)
+              (map (lambda (j)
+                    (list i j))
+                   lst1))
+             lst2))
