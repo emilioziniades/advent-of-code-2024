@@ -8,7 +8,8 @@
              (day02)
              (day03)
              (day04)
-             (day05))
+             (day05)
+             (day06))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -107,4 +108,11 @@
           5273
           #:fetch-day
           5)
+(run-test "day06-part1-example" "example/day06.txt" count-guard-positions 41)
+(run-test "day06-part1-input"
+          "input/day06.txt"
+          count-guard-positions
+          5551
+          #:fetch-day
+          6)
 (test-end "advent-of-code")
