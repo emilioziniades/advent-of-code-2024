@@ -15,9 +15,7 @@
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
           (fetch-input fetch-day))
-         (define data (read-file filename))
-         (define actual (test-fn data))
-         (test-equal test-name expected actual))
+         (test-equal test-name expected (test-fn (read-file filename))))
 
 ;; SETUP
 (init-test-runner)
