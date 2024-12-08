@@ -10,7 +10,8 @@
              (day04)
              (day05)
              (day06)
-             (day07))
+             (day07)
+             (day08))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -143,4 +144,12 @@
           581941094529163
           #:fetch-day
           7)
+;; day 8
+(run-test "day08-part1-example" "example/day08.txt" count-antinodes 14)
+(run-test "day08-part1-input"
+          "input/day08.txt"
+          count-antinodes
+          295
+          #:fetch-day
+          8)
 (test-end "advent-of-code")
