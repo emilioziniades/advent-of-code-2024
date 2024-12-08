@@ -152,4 +152,14 @@
           295
           #:fetch-day
           8)
+(run-test "day08-part2-example"
+          "example/day08.txt"
+          count-harmonic-antinodes
+          34)
+(run-test "day08-part2-input"
+          "input/day08.txt"
+          count-harmonic-antinodes
+          1034
+          #:fetch-day
+          8)
 (test-end "advent-of-code")
