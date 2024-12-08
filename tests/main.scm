@@ -125,12 +125,22 @@
 ;; day 7
 (run-test "day07-part1-example"
           "example/day07.txt"
-          count-possible-equations
+          (count-possible-equations is-true-equation?)
           3749)
 (run-test "day07-part1-input"
           "input/day07.txt"
-          count-possible-equations
+          (count-possible-equations is-true-equation?)
           21572148763543
+          #:fetch-day
+          7)
+(run-test "day07-part2-example"
+          "example/day07.txt"
+          (count-possible-equations is-true-equation-with-concat?)
+          11387)
+(run-test "day07-part2-input"
+          "input/day07.txt"
+          (count-possible-equations is-true-equation-with-concat?)
+          581941094529163
           #:fetch-day
           7)
 (test-end "advent-of-code")
