@@ -9,7 +9,8 @@
              (day03)
              (day04)
              (day05)
-             (day06))
+             (day06)
+             (day07))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -108,6 +109,7 @@
           5273
           #:fetch-day
           5)
+;; day 6
 (run-test "day06-part1-example" "example/day06.txt" count-guard-positions 41)
 (run-test "day06-part1-input"
           "input/day06.txt"
@@ -122,4 +124,15 @@
           1939
           #:fetch-day
           6)
+;; day 7
+(run-test "day07-part1-example"
+          "example/day07.txt"
+          count-possible-equations
+          3749)
+(run-test "day07-part1-input"
+          "input/day07.txt"
+          count-possible-equations
+          21572148763543
+          #:fetch-day
+          7)
 (test-end "advent-of-code")
