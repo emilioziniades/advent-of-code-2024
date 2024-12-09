@@ -11,7 +11,8 @@
              (day05)
              (day06)
              (day07)
-             (day08))
+             (day08)
+             (day09))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -162,4 +163,12 @@
           1034
           #:fetch-day
           8)
+;; day 9
+(run-test "day09-part1-example" "example/day09.txt" filesystem-checksum 1928)
+(run-test "day09-part1-input"
+          "input/day09.txt"
+          filesystem-checksum
+          6216544403458
+          #:fetch-day
+          9)
 (test-end "advent-of-code")
