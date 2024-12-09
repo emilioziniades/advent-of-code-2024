@@ -171,4 +171,14 @@
           6216544403458
           #:fetch-day
           9)
+(run-test "day09-part2-example"
+          "example/day09.txt"
+          filesystem-checksum-block
+          2858)
+(run-test "day09-part2-input"
+          "input/day09.txt"
+          filesystem-checksum-block
+          6237075041489
+          #:fetch-day
+          9)
 (test-end "advent-of-code")
