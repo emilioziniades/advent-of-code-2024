@@ -40,20 +40,17 @@
         (expanded-disk-map (expand-disk-map disk-map)))
   (calculate-checksum (compact-disk-map-block expanded-disk-map))))
 
-;; - find the biggest file ID
-;; - for each file ID from biggest to 0:
-;;   - find a space to its left big enough
-;;    - if found:
-;;     - swap with the beginning of that space
-;;     - otherwise move on the the next file
+;; Find the biggest file ID.
+;; For each file ID from biggest to 0:
+;;   Find a space to its left big enough.
+;;     If found:
+;;       Swap with the beginning of that space.
+;;       Otherwise move on the the next file.
 (define (compact-disk-map-block dm)
- (define (recursive-compact-disk-map-block id)
+ (define (recursive-compact-disk-map-block id id-start)
   (if (< id 0)
    dm
-   (let* ((id-start (array-index-right dm
-                                       (lambda (x)
-                                        (equal? x id))))
-          (id-end (file-end-index dm id id-start))
+   (let* ((id-end (file-end-index dm id id-start))
           (size (1+ (- id-start id-end)))
           (free-space-start (find-free-space dm size)))
     (when (and free-space-start
@@ -62,11 +59,15 @@
       (for-each (lambda (i)
                  (array-swap! dm (+ i id-end) (+ i free-space-start)))
                 (iota size))))
-    (recursive-compact-disk-map-block (1- id)))))
+    (recursive-compact-disk-map-block (1- id)
+                                      (array-index-right dm
+                                                         (lambda (x)
+                                                          (equal? x (1- id)))
+                                                         id-end)))))
 
  (let* ((file-id-start (array-index-right dm identity))
         (file-id (array-ref dm file-id-start)))
-  (recursive-compact-disk-map-block file-id)))
+  (recursive-compact-disk-map-block file-id file-id-start)))
 
 (define (file-end-index arr file-id id-start)
  (define (recursive-file-end-index idx)
@@ -77,6 +78,8 @@
 
  (recursive-file-end-index id-start))
 
+;; TODO: this function makes the whole part 2 algorithm O(N^2), because
+;; for every file, we have to scan the whole array again.
 (define (find-free-space arr size)
  (define (find-free-space-recursive idx)
   (cond
@@ -141,17 +144,19 @@
 
  (recursive-array-index arr 0))
 
-(define (array-index-right arr pred)
- (define (recursive-array-index-right arr idx)
-  (cond
-   ((not (array-in-bounds? arr idx))
-    #f)
-   ((pred (array-ref arr idx))
-    idx)
-   (else
-    (recursive-array-index-right arr (1- idx)))))
+(define* (array-index-right arr pred #:optional start)
+         (define (recursive-array-index-right arr idx)
+          (cond
+           ((not (array-in-bounds? arr idx))
+            #f)
+           ((pred (array-ref arr idx))
+            idx)
+           (else
+            (recursive-array-index-right arr (1- idx)))))
 
- (recursive-array-index-right arr (1- (array-length arr))))
+         (recursive-array-index-right arr
+                                      (or start
+                                          (1- (array-length arr)))))
 
 (define (array-swap! arr idx1 idx2)
  (let ((n1 (array-ref arr idx1))
