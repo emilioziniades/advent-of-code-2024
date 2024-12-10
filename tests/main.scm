@@ -12,7 +12,8 @@
              (day06)
              (day07)
              (day08)
-             (day09))
+             (day09)
+             (day10))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -181,4 +182,12 @@
           6237075041489
           #:fetch-day
           9)
+;; day 10
+(run-test "day10-part1-example" "example/day10.txt" trailhead-scores 36)
+(run-test "day10-part1-input"
+          "input/day10.txt"
+          trailhead-scores
+          825
+          #:fetch-day
+          10)
 (test-end "advent-of-code")
