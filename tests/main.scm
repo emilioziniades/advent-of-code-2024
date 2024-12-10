@@ -190,4 +190,11 @@
           825
           #:fetch-day
           10)
+(run-test "day10-part2-example" "example/day10.txt" trailhead-ratings 81)
+(run-test "day10-part2-input"
+          "input/day10.txt"
+          trailhead-ratings
+          1805
+          #:fetch-day
+          10)
 (test-end "advent-of-code")
