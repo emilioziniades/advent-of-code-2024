@@ -2,7 +2,7 @@
                #:export
                (filesystem-checksum filesystem-checksum-block))
 
-(use-modules (srfi srfi-1))
+(use-modules (util input) (srfi srfi-1))
 
 ;; part 1
 (define (filesystem-checksum file)
@@ -123,9 +123,6 @@
  (map (lambda (i)
        (array-ref arr i))
       (iota (floor (/ (array-length arr) 2)) 1 2)))
-
-(define (parse-int char)
- (- (char->integer char) 48))
 
 (define (interleave lst1 lst2)
  (if (null? lst1)

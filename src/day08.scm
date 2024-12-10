@@ -76,12 +76,3 @@
   (if existing-value
    (hash-set! hash-table key (cons value existing-value))
    (hash-set! hash-table key (list value)))))
-
-(define (list-distinct lst)
- (define set (make-hash-table))
- (for-each (lambda (x)
-            (hash-set! set x #t))
-           lst)
- (hash-map->list (lambda (k v)
-                  k)
-                 set))

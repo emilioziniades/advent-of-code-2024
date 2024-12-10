@@ -7,7 +7,9 @@
                              lines
                              list-sum
                              make-grid
-                             combinations-2))
+                             combinations-2
+                             parse-int
+                             list-distinct))
 
 (use-modules (ice-9 textual-ports)
              (ice-9 curried-definitions)
@@ -42,3 +44,15 @@
                     (list i j))
                    lst1))
              lst2))
+
+(define (parse-int char)
+ (- (char->integer char) 48))
+
+(define (list-distinct lst)
+ (define set (make-hash-table))
+ (for-each (lambda (x)
+            (hash-set! set x #t))
+           lst)
+ (hash-map->list (lambda (k v)
+                  k)
+                 set))
