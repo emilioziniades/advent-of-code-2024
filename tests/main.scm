@@ -13,7 +13,8 @@
              (day07)
              (day08)
              (day09)
-             (day10))
+             (day10)
+             (day11))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -197,4 +198,12 @@
           1805
           #:fetch-day
           10)
+;; day 11
+(run-test "day11-part1-example" "example/day11.txt" count-stones 55312)
+(run-test "day11-part1-input"
+          "input/day11.txt"
+          count-stones
+          188902
+          #:fetch-day
+          11)
 (test-end "advent-of-code")
