@@ -199,11 +199,21 @@
           #:fetch-day
           10)
 ;; day 11
-(run-test "day11-part1-example" "example/day11.txt" count-stones 55312)
+(run-test "day11-part1-example" "example/day11.txt" (count-stones 25) 55312)
 (run-test "day11-part1-input"
           "input/day11.txt"
-          count-stones
+          (count-stones 25)
           188902
+          #:fetch-day
+          11)
+(run-test "day11-part2-example"
+          "example/day11.txt"
+          (count-stones 75)
+          65601038650482)
+(run-test "day11-part2-input"
+          "input/day11.txt"
+          (count-stones 75)
+          223894720281135
           #:fetch-day
           11)
 (test-end "advent-of-code")
