@@ -9,7 +9,8 @@
                              make-grid
                              combinations-2
                              parse-int
-                             list-distinct))
+                             list-distinct
+                             neighbours))
 
 (use-modules (ice-9 textual-ports)
              (ice-9 curried-definitions)
@@ -56,3 +57,6 @@
  (hash-map->list (lambda (k v)
                   k)
                  set))
+
+(define (neighbours x y)
+ (list (list (1- x) y) (list (1+ x) y) (list x (1- y)) (list x (1+ y))))

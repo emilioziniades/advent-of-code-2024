@@ -23,10 +23,6 @@
   (let* ((x (first pos))
          (y (second pos))
          (height (parse-int (apply array-ref (cons arr pos))))
-         (neighbours (list (list (1- x) y)
-                           (list (1+ x) y)
-                           (list x (1- y))
-                           (list x (1+ y))))
          (valid-neighbours (filter
                             (lambda (p)
                              (and
@@ -34,7 +30,7 @@
                               (equal?
                                (1+ height)
                                (parse-int (apply array-ref (cons arr p))))))
-                            neighbours)))
+                            (neighbours x y))))
    (if (equal? height 9)
     (list pos)
     (append-map helper valid-neighbours))))
