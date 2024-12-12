@@ -51,7 +51,8 @@
        (actual-value (object->string (test-result-ref runner 'actual-value #f)))
        (expected-value (object->string
                         (test-result-ref runner 'expected-value #f)))
-       (result-kind (symbol->string (test-result-ref runner 'result-kind #f))))
+       (result-kind (symbol->string (test-result-ref runner 'result-kind #f)))
+       (actual-error (test-result-ref runner 'actual-error #f)))
   (begin
    (cond
     ((equal? result-kind "skip")
@@ -67,10 +68,13 @@
       (display-colour red (right-pad (string-append test-name ": ")))
       (display-colour red result-kind)
       (display "\t")
-      (display-colour red "expected: ")
-      (display-colour red expected-value)
-      (display-colour red ", actual: ")
-      (display-colour red actual-value)))
+      (if actual-error
+       (display-colour red (object->string actual-error))
+       (begin
+        (display-colour red "expected: ")
+        (display-colour red expected-value)
+        (display-colour red ", actual: ")
+        (display-colour red actual-value)))))
     (else
      (raise-exception (string-append "unexpected result kind: " result-kind))))
    (newline))))
