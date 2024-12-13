@@ -229,11 +229,21 @@
           #:fetch-day
           12)
 ;; day 13
-(run-test "day13-part1-example" "example/day13.txt" fewest-tokens 480)
+(run-test "day13-part1-example" "example/day13.txt" (fewest-tokens 0) 480)
 (run-test "day13-part1-input"
           "input/day13.txt"
-          fewest-tokens
+          (fewest-tokens 0)
           34787
+          #:fetch-day
+          13)
+(run-test "day13-part2-example"
+          "example/day13.txt"
+          (fewest-tokens 10000000000000)
+          875318608908)
+(run-test "day13-part2-input"
+          "input/day13.txt"
+          (fewest-tokens 10000000000000)
+          85644161121698
           #:fetch-day
           13)
 (test-end "advent-of-code")

@@ -1,8 +1,11 @@
 (define-module (day13) #:export (fewest-tokens))
 
-(use-modules (util io) (util input) (srfi srfi-1) (ice-9 string-fun))
+(use-modules (util input)
+             (srfi srfi-1)
+             (ice-9 curried-definitions)
+             (ice-9 string-fun))
 
-;; part 1
+;; part 1 and 2
 ;; Each claw machine can be viewed as a pair of linear equations. Example:
 ;; Button A: X+94, Y+34
 ;; Button B: X+22, Y+67
@@ -10,12 +13,12 @@
 ;; We are trying to find the number of presses for a and b that result in the
 ;; correct change in x and y position of the claw machine. The question speaks about 
 ;; finding the smallest solution, but there can either be 1 or 0 solutions, assuming
-;; the problem can be expressed as a system of linear equations. So, to do that,
-;; let a = presses of button a, and b = presses of button b, we are trying to find (a, b)
-;; such that both equations are true:
+;; the problem can be expressed as a system of linear equations. let a = presses of button a, 
+;; and b = presses of button b, we are trying to find (a, b) such that both equations are true:
 ;; 94a + 22b = 8400
 ;; 34a + 67b = 5400
-(define (fewest-tokens file)
+(define*
+ ((fewest-tokens prize-adjustment) file)
  (apply
   +
   (map
@@ -31,8 +34,8 @@
             (a-y (second lst))
             (b-x (third lst))
             (b-y (fourth lst))
-            (prize-x (fifth lst))
-            (prize-y (sixth lst)))
+            (prize-x (+ prize-adjustment (fifth lst)))
+            (prize-y (+ prize-adjustment (sixth lst))))
        (solve-linear-equation-pair a-x b-x (- prize-x) a-y b-y (- prize-y))))
      (parse-input file))))))
 
