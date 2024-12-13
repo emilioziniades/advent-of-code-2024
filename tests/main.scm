@@ -15,7 +15,8 @@
              (day09)
              (day10)
              (day11)
-             (day12))
+             (day12)
+             (day13))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -227,4 +228,12 @@
           1363682
           #:fetch-day
           12)
+;; day 13
+(run-test "day13-part1-example" "example/day13.txt" fewest-tokens 480)
+(run-test "day13-part1-input"
+          "input/day13.txt"
+          fewest-tokens
+          34787
+          #:fetch-day
+          13)
 (test-end "advent-of-code")
