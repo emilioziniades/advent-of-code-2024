@@ -17,6 +17,13 @@
 ;; and b = presses of button b, we are trying to find (a, b) such that both equations are true:
 ;; 94a + 22b = 8400
 ;; 34a + 67b = 5400
+;; EDIT: After reading some posts of reddit, I realize my solution has an edge case. Consider this example:
+;; Button A: X+10, Y+10
+;; Button B: X+20, Y+20
+;; Prize: X=200, Y=200
+;; There are actually two solutions to this: 20 a presses or 10 b presses. The simultaneous equation solver
+;; below would return false because of a division by 0. Luckily, none of the example or input data had such a case.
+
 (define*
  ((fewest-tokens prize-adjustment) file)
  (apply
