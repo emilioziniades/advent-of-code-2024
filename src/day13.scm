@@ -23,7 +23,6 @@
 ;; Prize: X=200, Y=200
 ;; There are actually two solutions to this: 20 a presses or 10 b presses. The simultaneous equation solver
 ;; below would return false because of a division by 0. Luckily, none of the example or input data had such a case.
-
 (define*
  ((fewest-tokens prize-adjustment) file)
  (apply
