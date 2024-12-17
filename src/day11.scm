@@ -4,9 +4,7 @@
 
 ;; part 1 and 2
 (define ((count-stones n) file)
- (list-sum (hash-map->list (lambda (k v)
-                            v)
-                           (blink-stones-n (parse-input file) n))))
+ (list-sum (hash-map-values (blink-stones-n (parse-input file) n))))
 
 (define (blink-stones-n hashmap n)
  (if (equal? n 0)

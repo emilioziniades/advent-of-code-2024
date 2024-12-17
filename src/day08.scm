@@ -6,9 +6,7 @@
 (define (count-antinodes file)
  (let* ((arr (make-grid file))
         (antennas (get-antennas arr))
-        (antenna-groups (hash-map->list (lambda (k v)
-                                         v)
-                                        antennas)))
+        (antenna-groups (hash-map-values antennas)))
   (length
    (filter
     (lambda (pos)
@@ -30,9 +28,7 @@
  (let* ((arr (make-grid file))
         (arr-size (array-length arr))
         (antennas (get-antennas arr))
-        (antenna-groups (hash-map->list (lambda (k v)
-                                         v)
-                                        antennas)))
+        (antenna-groups (hash-map-values antennas)))
   (length
    (filter (lambda (pos)
             (apply array-in-bounds? arr pos))

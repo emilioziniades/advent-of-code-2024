@@ -10,7 +10,10 @@
                              combinations-2
                              parse-int
                              list-distinct
-                             neighbours))
+                             neighbours
+                             hash-increment
+                             hash-map-keys
+                             hash-map-values))
 
 (use-modules (ice-9 textual-ports)
              (ice-9 curried-definitions)
@@ -54,9 +57,21 @@
  (for-each (lambda (x)
             (hash-set! set x #t))
            lst)
- (hash-map->list (lambda (k v)
-                  k)
-                 set))
+ (hash-map-keys set))
 
 (define (neighbours x y)
  (list (list (1- x) y) (list (1+ x) y) (list x (1- y)) (list x (1+ y))))
+
+(define (hash-increment hash-table key)
+ (hash-set! hash-table key (1+ (hash-ref hash-table key 0)))
+ hash-table)
+
+(define (hash-map-keys hash-map)
+ (hash-map->list (lambda (k v)
+                  k)
+                 hash-map))
+
+(define (hash-map-values hash-map)
+ (hash-map->list (lambda (k v)
+                  v)
+                 hash-map))

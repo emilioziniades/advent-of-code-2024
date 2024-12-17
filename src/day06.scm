@@ -22,10 +22,7 @@
          (array-index arr
                       (lambda (cell)
                        (equal? #\^ cell))))
- (define obstruction-positions
-         (hash-map->list (lambda (k v)
-                          k)
-                         (guard-positions arr)))
+ (define obstruction-positions (hash-map-keys (guard-positions arr)))
  (length (filter (lambda (pos)
                   (causes-cycle? arr pos start-pos 'up))
                  obstruction-positions)))
@@ -113,6 +110,3 @@
    'up)
   (else
    (raise-exception "unrecognized direction"))))
-
-(define (hash-increment hash-table key)
- (hash-set! hash-table key (1+ (hash-ref hash-table key 0))))
