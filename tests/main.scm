@@ -16,7 +16,8 @@
              (day10)
              (day11)
              (day12)
-             (day13))
+             (day13)
+             (day14))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -246,4 +247,15 @@
           85644161121698
           #:fetch-day
           13)
+;; day 14
+(run-test "day14-part1-example"
+          "example/day14.txt"
+          (safety-factor 7 11 100)
+          12)
+(run-test "day14-part1-input"
+          "input/day14.txt"
+          (safety-factor 103 101 100)
+          224357412
+          #:fetch-day
+          14)
 (test-end "advent-of-code")
