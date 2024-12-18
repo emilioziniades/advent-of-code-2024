@@ -270,4 +270,9 @@
           "2,3,4,7,5,7,3,0,7"
           #:fetch-day
           17)
+(run-test "day17-part2-example"
+          "example/day17-part2.txt"
+          make-quine-program
+          117440)
+;; (run-test "day17-part2-input" "input/day17.txt" make-quine-program 0)
 (test-end "advent-of-code")

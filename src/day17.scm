@@ -1,4 +1,4 @@
-(define-module (day17) #:export (get-program-output))
+(define-module (day17) #:export (get-program-output make-quine-program))
 
 (use-modules (util io) (srfi srfi-1) (srfi srfi-9 gnu) (ice-9 string-fun))
 
@@ -42,6 +42,46 @@
    (bdv computer))
   ((7)
    (cdv computer))))
+
+;; part 2
+;; TODO: obviously going from 0 to infinity and checking every program isn't
+;; going to work. You will have to find some optimizations here. Like searching
+;; through only a selected number of possible options. Some things that stand out
+;; about this problem: there is lots of modulo 8 happening, maybe every eighth has 
+;; some common behaviour? Look at the output for the first few 100 values 
+;; and see if there are some patterns. Another idea is to try the computation in reverse.
+(define (make-quine-program file)
+ (define (helper computer n)
+  (display n)
+  (newline)
+  (if (is-quine-program (set-a-register computer n))
+   n
+   (helper computer (1+ n))))
+
+ (helper (parse-input file) 0))
+
+(define (is-quine-program computer)
+ (let* ((output (get-output computer))
+        (program (get-program computer))
+        (len-program (length program))
+        (len-output (length output))
+        (rev-output (reverse output))
+        (pointer (get-pointer computer)))
+  (cond
+   ((> pointer (1- len-program))
+    (equal? program rev-output))
+   ((> len-output len-program)
+    #f)
+   ((not (list-starts-with? program rev-output))
+    #f)
+   ((equal? program rev-output)
+    #t)
+   (else
+    (is-quine-program (step computer))))))
+
+;; does lst1 start with lst2?
+(define (list-starts-with? lst1 lst2)
+ (equal? (take lst1 (length lst2)) lst2))
 
 ;; opcodes
 (define (adv computer)
