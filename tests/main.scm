@@ -287,4 +287,12 @@
           276
           #:fetch-day
           18)
+(run-test "day18-part2-example"
+          "example/day18.txt"
+          (find-blocking-byte 7)
+          '(6 1))
+(run-test "day18-part2-input"
+          "input/day18.txt"
+          (find-blocking-byte 71)
+          '(60 37))
 (test-end "advent-of-code")
