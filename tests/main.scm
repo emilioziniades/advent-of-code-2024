@@ -18,7 +18,8 @@
              (day12)
              (day13)
              (day14)
-             (day17))
+             (day17)
+             (day18))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -275,4 +276,15 @@
           make-quine-program
           117440)
 ;; (run-test "day17-part2-input" "input/day17.txt" make-quine-program 0)
+;; day 18
+(run-test "day18-part1-example"
+          "example/day18.txt"
+          (find-shortest-path 7 12)
+          22)
+(run-test "day18-part1-input"
+          "input/day18.txt"
+          (find-shortest-path 71 1024)
+          276
+          #:fetch-day
+          18)
 (test-end "advent-of-code")
