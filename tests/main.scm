@@ -19,7 +19,8 @@
              (day13)
              (day14)
              (day17)
-             (day18))
+             (day18)
+             (day19))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -295,4 +296,12 @@
           "input/day18.txt"
           (find-blocking-byte 71)
           '(60 37))
+;; day 19
+(run-test "day19-part1-example" "example/day19.txt" count-possible-designs 6)
+(run-test "day19-part1-input"
+          "input/day19.txt"
+          count-possible-designs
+          371
+          #:fetch-day
+          19)
 (test-end "advent-of-code")
