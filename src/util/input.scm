@@ -13,10 +13,12 @@
                              neighbours
                              hash-increment
                              hash-map-keys
-                             hash-map-values))
+                             hash-map-values
+                             list->hash-set))
 
 (use-modules (ice-9 textual-ports)
              (ice-9 curried-definitions)
+             (ice-9 hash-table)
              (srfi srfi-1)
              (srfi srfi-11)
              (srfi srfi-13))
@@ -75,3 +77,8 @@
  (hash-map->list (lambda (k v)
                   v)
                  hash-map))
+
+(define (list->hash-set lst)
+ (alist->hash-table (map (lambda (x)
+                          (cons x #t))
+                         lst)))

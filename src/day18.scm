@@ -92,12 +92,6 @@
  (helper start)
  seen)
 
-;; common to both parts
-(define (list->hash-set lst)
- (alist->hash-table (map (lambda (x)
-                          (cons x #t))
-                         lst)))
-
 ;; input parsing
 (define (parse-input file)
  (map (lambda (line)
