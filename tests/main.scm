@@ -304,4 +304,11 @@
           371
           #:fetch-day
           19)
+(run-test "day19-part2-example" "example/day19.txt" count-design-ways 16)
+(run-test "day19-part2-input"
+          "input/day19.txt"
+          count-design-ways
+          650354687260341
+          #:fetch-day
+          19)
 (test-end "advent-of-code")
