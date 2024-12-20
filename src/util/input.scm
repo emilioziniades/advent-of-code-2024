@@ -14,7 +14,9 @@
                              hash-increment
                              hash-map-keys
                              hash-map-values
-                             list->hash-set))
+                             list->hash-set
+                             array-ref-nd
+                             array-in-bounds-nd?))
 
 (use-modules (ice-9 textual-ports)
              (ice-9 curried-definitions)
@@ -82,3 +84,9 @@
  (alist->hash-table (map (lambda (x)
                           (cons x #t))
                          lst)))
+
+(define (array-ref-nd arr lst)
+ (apply array-ref (cons arr lst)))
+
+(define (array-in-bounds-nd? arr lst)
+ (apply array-in-bounds? (cons arr lst)))

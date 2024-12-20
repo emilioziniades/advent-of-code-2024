@@ -56,9 +56,3 @@
 ;; assumes hashmap has list values
 (define (hash-append! hashmap key value)
  (hash-set! hashmap key (cons value (hash-ref hashmap key '()))))
-
-(define (array-ref-nd arr lst)
- (apply array-ref (cons arr lst)))
-
-(define (array-in-bounds-nd? arr lst)
- (apply array-in-bounds? (cons arr lst)))
