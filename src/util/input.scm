@@ -16,7 +16,8 @@
                              hash-map-values
                              list->hash-set
                              array-ref-nd
-                             array-in-bounds-nd?))
+                             array-in-bounds-nd?
+                             manhattan))
 
 (use-modules (ice-9 textual-ports)
              (ice-9 curried-definitions)
@@ -90,3 +91,6 @@
 
 (define (array-in-bounds-nd? arr lst)
  (apply array-in-bounds? (cons arr lst)))
+
+(define (manhattan x1 y1 x2 y2)
+ (+ (abs (- y1 y2)) (abs (- x1 x2))))

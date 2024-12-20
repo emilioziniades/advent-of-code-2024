@@ -58,9 +58,6 @@
 
  (helper frontier cost-so-far))
 
-(define (manhattan x1 y1 x2 y2)
- (+ (abs (- y1 y2)) (abs (- x1 x2))))
-
 ;; part 2
 (define ((find-blocking-byte size) file)
  (define end (list (1- size) (1- size)))
