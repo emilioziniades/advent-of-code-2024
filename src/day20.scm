@@ -8,8 +8,8 @@
              (ice-9 hash-table)
              (ice-9 curried-definitions))
 
-; part 1
-(define ((count-good-cheats minimum-save) file)
+; part 1 and part 2
+(define ((count-good-cheats minimum-save min-cheat-length max-cheat-length) file)
  (let* ((arr (make-grid file))
         (all-positions (get-grid-positions arr))
         (start (find (lambda (pos)
@@ -19,7 +19,9 @@
                     (equal? #\E (array-ref-nd arr pos)))
                    all-positions))
         (costs (djikstra start end arr))
-        (possible-cheats (all-possible-cheats arr)))
+        (possible-cheats (all-possible-cheats arr
+                                              min-cheat-length
+                                              max-cheat-length)))
   (count (lambda (n)
           (>= n minimum-save))
          (map (lambda (cheat)
@@ -30,41 +32,32 @@
  (let ((size (array-length arr)))
   (combinations-2 (iota size) (iota size))))
 
-(define (all-possible-cheats arr)
+(define (all-possible-cheats arr min-cheat-length max-cheat-length)
  (let* ((all-positions (get-grid-positions arr))
-        (valid-starts (filter (lambda (pos)
-                               (not (equal? #\# (array-ref-nd arr pos))))
-                              all-positions)))
-  (append-map (lambda (start)
-               (filter-map (lambda (end)
-                            (if (and (array-in-bounds-nd? arr end)
-                                     (not (equal? #\# (array-ref-nd arr end))))
-                             (list start end)
-                             #f))
-                           (possible-cheat-ends start)))
-              valid-starts)))
+        (valid-positions (filter (lambda (pos)
+                                  (not (equal? #\# (array-ref-nd arr pos))))
+                                 all-positions)))
+  (append-map
+   (lambda (start)
+    (filter-map (lambda (end)
+                 (if (and (array-in-bounds-nd? arr end)
+                          (not (equal? #\# (array-ref-nd arr end))))
+                  (list start end)
+                  #f))
+                (possible-cheat-ends start min-cheat-length max-cheat-length)))
+   valid-positions)))
 
-(define (possible-cheat-ends start)
- (let ((y (first start))
-       (x (second start)))
-  (list ;; right 2
-        (list y (+ x 2))
-        ;; left 2
-        (list y (- x 2))
-        ;; down 2
-        (list (+ y 2) x)
-        ;; up 2
-        (list (- y 2) x)
-        ;; down-right 1
-        (list (+ y 1) (+ x 1))
-        ;; down-left 1
-        (list (+ y 1) (- x 1))
-        ;; up-right 1
-        (list (- y 1) (+ x 1))
-        ;; up-left 1
-        (list (- y 1) (- x 1)))))
+(define (possible-cheat-ends start min-length max-length)
+ (let ((cheat-lengths (iota (1+ (- max-length min-length)) min-length)))
+  (append-map (lambda (n)
+               (manhattan-positions n start))
+              cheat-lengths)))
 
-;; pretty much a copy-paste from a-star in day18, without the heuristic.
+;; pretty much a copy-paste from a-star in day18, without the heuristic. I could
+;; have probably just used DFS, but since the graph is so simple (each node only has
+;; two edges), I didn't bother simplifying this further. The real bottleneck in this
+;; solution, particularly for part 2, was figuring out the possible (cheat-start, cheat-end)
+;; pairs.
 (define (djikstra start end arr)
  (define frontier (push '() start 0))
  (define cost-so-far (alist->hash-table (list (cons start 0))))
@@ -104,8 +97,34 @@
 ;; a mapping from position -> cost (in this case time). We can evaluate
 ;; a cheat by considering how much cost would be saved by moving from
 ;; cheat-start to cheat-end, accounting for the time it takes to travel
-;; from cheat-start to cheat-end, which is 2 in this puzzle.
+;; from cheat-start to cheat-end
 (define (test-cheat cheat costs)
  (let ((start (first cheat))
        (end (second cheat)))
-  (- (hash-ref costs end) (hash-ref costs start) 2)))
+  (- (hash-ref costs end)
+     (hash-ref costs start)
+     (apply manhattan (append start end)))))
+
+;; all the n1, n2 such that n1 + n2 = number
+(define (unsum number)
+ (map (lambda (n)
+       (list n (- number n)))
+      (iota number)))
+
+;; returns all the coordinates with a manhattan distance of
+;; `distance` away from `position`.
+(define (manhattan-positions distance position)
+ (let ((y (first position))
+       (x (second position)))
+  (list-distinct (append-map (lambda (lst)
+                              (let ((n1 (first lst))
+                                    (n2 (second lst)))
+                               (list (list (+ y n1) (+ x n2))
+                                     (list (+ y n1) (- x n2))
+                                     (list (- y n1) (+ x n2))
+                                     (list (- y n1) (- x n2))
+                                     (list (+ y n2) (+ x n1))
+                                     (list (+ y n2) (- x n1))
+                                     (list (- y n2) (+ x n1))
+                                     (list (- y n2) (- x n1)))))
+                             (unsum distance)))))

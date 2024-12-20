@@ -313,11 +313,22 @@
           #:fetch-day
           19)
 ;; day 20
-(run-test "day20-part1-example" "example/day20.txt" (count-good-cheats 1) 44)
+(run-test "day20-part1-example"
+          "example/day20.txt"
+          (count-good-cheats 1 2 2)
+          44)
 (run-test "day20-part1-input"
           "input/day20.txt"
-          (count-good-cheats 100)
+          (count-good-cheats 100 2 2)
           1263
           #:fetch-day
           20)
+(run-test "day20-part2-example"
+          "example/day20.txt"
+          (count-good-cheats 50 1 20)
+          285)
+(run-test "day20-part2-input"
+          "input/day20.txt"
+          (count-good-cheats 100 1 20)
+          957831)
 (test-end "advent-of-code")
