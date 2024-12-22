@@ -21,7 +21,8 @@
              (day17)
              (day18)
              (day19)
-             (day20))
+             (day20)
+             (day22))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -331,4 +332,12 @@
           "input/day20.txt"
           (count-good-cheats 100 1 20)
           957831)
+;; day 22
+(run-test "day22-part1-example" "example/day22.txt" sum-secrets 37327623)
+(run-test "day22-part1-input"
+          "input/day22.txt"
+          sum-secrets
+          20068964552
+          #:fetch-day
+          22)
 (test-end "advent-of-code")
