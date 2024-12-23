@@ -66,9 +66,3 @@
                (hash-append! antennas cell pos))))
             (combinations-2 (iota size) (iota size)))
   antennas))
-
-(define (hash-append! hash-table key value)
- (let* ((existing-value (hash-ref hash-table key #f)))
-  (if existing-value
-   (hash-set! hash-table key (cons value existing-value))
-   (hash-set! hash-table key (list value)))))

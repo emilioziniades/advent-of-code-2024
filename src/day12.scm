@@ -54,5 +54,3 @@
 ;; utility functions
 ;;
 ;; assumes hashmap has list values
-(define (hash-append! hashmap key value)
- (hash-set! hashmap key (cons value (hash-ref hashmap key '()))))

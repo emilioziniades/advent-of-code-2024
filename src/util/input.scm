@@ -17,7 +17,8 @@
                              list->hash-set
                              array-ref-nd
                              array-in-bounds-nd?
-                             manhattan))
+                             manhattan
+                             hash-append!))
 
 (use-modules (ice-9 textual-ports)
              (ice-9 curried-definitions)
@@ -94,3 +95,6 @@
 
 (define (manhattan x1 y1 x2 y2)
  (+ (abs (- y1 y2)) (abs (- x1 x2))))
+
+(define (hash-append! hashmap key value)
+ (hash-set! hashmap key (cons value (hash-ref hashmap key '()))))
