@@ -22,7 +22,8 @@
              (day18)
              (day19)
              (day20)
-             (day22))
+             (day22)
+             (day23))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -340,4 +341,12 @@
           20068964552
           #:fetch-day
           22)
+;; day 23
+(run-test "day23-part1-example" "example/day23.txt" count-t-triplets 7)
+(run-test "day23-part1-input"
+          "input/day23.txt"
+          count-t-triplets
+          1366
+          #:fetch-day
+          23)
 (test-end "advent-of-code")
