@@ -349,4 +349,12 @@
           1366
           #:fetch-day
           23)
+(run-test "day23-part2-example"
+          "example/day23.txt"
+          find-lan-party-password
+          "co,de,ka,ta")
+(run-test "day23-part2-input"
+          "input/day23.txt"
+          find-lan-party-password
+          "bs,cf,cn,gb,gk,jf,mp,qk,qo,st,ti,uc,xw")
 (test-end "advent-of-code")
