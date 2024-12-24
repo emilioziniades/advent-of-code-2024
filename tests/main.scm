@@ -23,7 +23,8 @@
              (day19)
              (day20)
              (day22)
-             (day23))
+             (day23)
+             (day24))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -356,5 +357,15 @@
 (run-test "day23-part2-input"
           "input/day23.txt"
           find-lan-party-password
-          "bs,cf,cn,gb,gk,jf,mp,qk,qo,st,ti,uc,xw")
+          "bs,cf,cn,gb,gk,jf,mp,qk,qo,st,ti,uc,xw"
+          #:fetch-day
+          23)
+;; day 24
+(run-test "day24-part1-example" "example/day24.txt" get-z-wire-number 2024)
+(run-test "day24-part1-input"
+          "input/day24.txt"
+          get-z-wire-number
+          52956035802096
+          #:fetch-day
+          24)
 (test-end "advent-of-code")
