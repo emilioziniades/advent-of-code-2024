@@ -21,6 +21,7 @@
 
  (helper 3 '(())))
 
+; TODO: this second part is really slow - it takes several minutes to run. Consider making it faster.
 ; part 2
 (define (find-lan-party-password file)
  (string-join (find-biggest-clique (parse-input file)) ","))
