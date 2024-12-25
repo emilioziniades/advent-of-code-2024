@@ -24,7 +24,8 @@
              (day20)
              (day22)
              (day23)
-             (day24))
+             (day24)
+             (day25))
 
 (define* (run-test test-name filename test-fn expected #:key fetch-day)
          (when fetch-day
@@ -368,4 +369,12 @@
           52956035802096
           #:fetch-day
           24)
+;; day 25
+(run-test "day25-part1-example" "example/day25.txt" count-lock-key-pairs 3)
+(run-test "day25-part1-input"
+          "input/day25.txt"
+          count-lock-key-pairs
+          3255
+          #:fetch-day
+          25)
 (test-end "advent-of-code")
