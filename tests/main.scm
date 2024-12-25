@@ -237,6 +237,28 @@
           1363682
           #:fetch-day
           12)
+(run-test "day12-part2-example-1"
+          "example/day12-1.txt"
+          price-fences-discount
+          80)
+(run-test "day12-part2-example-2"
+          "example/day12-4.txt"
+          price-fences-discount
+          236)
+(run-test "day12-part2-example-3"
+          "example/day12-5.txt"
+          price-fences-discount
+          368)
+(run-test "day12-part2-example-4"
+          "example/day12-3.txt"
+          price-fences-discount
+          1206)
+(run-test "day12-part2-input"
+          "input/day12.txt"
+          price-fences-discount
+          787680
+          #:fetch-day
+          12)
 ;; day 13
 (run-test "day13-part1-example" "example/day13.txt" (fewest-tokens 0) 480)
 (run-test "day13-part1-input"
