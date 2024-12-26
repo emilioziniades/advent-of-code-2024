@@ -288,6 +288,12 @@
           224357412
           #:fetch-day
           14)
+(run-test "day14-part2-input"
+          "input/day14.txt"
+          (ticks-until-xmas-tree 103 101)
+          7083
+          #:fetch-day
+          14)
 ;; day 17
 (run-test "day17-part1-example"
           "example/day17.txt"
